@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ikhtibar Post Generator</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;700&family=Scheherazade+New:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Define your uploaded custom font files here if needed */
+        /* Custom Uploaded Fonts */
         @font-face {
             font-family: 'Kanz al Marjaan';
             src: url('Kanz-al-Marjaan.ttf') format('truetype');
         }
         @font-face {
-            font-family: 'Al-Kanz';
+            font-family: 'Al-Kanz for Windows';
             src: url('Al-Kanz for Windows.ttf') format('truetype');
         }
 
@@ -38,10 +38,9 @@
     <div class="editor-panel">
         <h2>Ikhtebaar Appreciation Post</h2>
         
-        <<div class="field">
-            <label>Select Marhala</label>
+        <div class="field">
+            <label>1. Select Marhala</label>
             <select id="templateSelect" onchange="updateBackground()">
-                <option value="">-- Select Marhalah --</option>
                 <option value="M1.jpg">Marhala 1</option>
                 <option value="M2.jpg">Marhala 2</option>
                 <option value="M3.jpg">Marhala 3</option>
@@ -55,9 +54,9 @@
         </div>
 
         <div class="field">
-            <label>Mohallah Institue/Imani Darsgah</label>
+            <label>2. Mohallah Institute / Imani Darsgah</label>
             <select id="instName">
-                <option value="">--Select--</option>
+                <option value="">-- Select --</option>
                 <option value="قسم التحفيظ - جمالي محلة">جمالي محلة</option>
                 <option value="قسم التحفيظ - المحلة البرهانية">المحلة البرهانية</option>
                 <option value="قسم التحفيظ - برهاني باغ محلة">برهاني باغ محلة</option>
@@ -94,28 +93,25 @@
             </select>
         </div>
 
-             </select>
-        </div>
-
         <div class="field">
-            <label>3. Typography (Names Only)</label>
+            <label>3. Typography (Student Details)</label>
             <select id="fontSelect">
                 <option value="Amiri">Amiri (Default)</option>
                 <option value="Aref Ruqaa">Aref Ruqaa</option>
                 <option value="Scheherazade New">Scheherazade New</option>
                 <option value="Al-Kanz for Windows">Al-Kanz</option>
-                <option value="Kanz-al-Marjaan">Kanz al Marjaan</option>
+                <option value="Kanz al Marjaan">Kanz al Marjaan</option>
             </select>
-            <label style="font-size: 0.7em; margin-top:5px;">Color for Student Names</label>
-            <input type="color" id="nameColor" value="#1a5276">
+            <label style="font-size: 0.75em; margin-top:8px;">Color for Student Names</label>
+            <input type="color" id="nameColor" value="#ffffff">
         </div>
 
         <div class="field">
-            <label>Student Details</label>
-            <input type="text" id="stdFirstName" placeholder="الاسم ">
-            <input type="text" id="stdFatherName" placeholder="اسم الوالد / زوج">
+            <label>4. Student Details</label>
+            <input type="text" id="stdFirstName" placeholder="الاسم (First Name)">
+            <input type="text" id="stdFatherName" placeholder="اسم الوالد / زوج (Father/Husband)">
             <input type="text" id="stdSurname" placeholder="اللقب (Surname)">
-            <input type="text" id="stdAge" placeholder="اAge">
+            <input type="text" id="stdAge" placeholder="العمر (Age)">
         </div>
 
         <div class="field">
@@ -130,15 +126,16 @@
                 <option value="يوم الخميس">يوم الخميس</option>
                 <option value="يوم الجمعة">يوم الجمعة</option>
             </select>
-            <input type="text" id="dateHijri" placeholder="التاريخ">
+            <input type="text" id="dateHijri" placeholder="التاريخ الهجري">
             <input type="text" id="dateGreg" placeholder="Gregorian Date">
         </div>
-
 
         <div class="field">
             <label>6. Photo Controls</label>
             <input type="file" id="studentUpload" accept="image/*">
+            <label style="font-size:0.7em; margin-top:5px;">Zoom</label>
             <input type="range" id="photoZoom" min="0.5" max="3.0" step="0.1" value="1">
+            <label style="font-size:0.7em; margin-top:5px;">Vertical Position</label>
             <input type="range" id="photoYOffset" min="-500" max="500" value="0">
         </div>
 
@@ -146,7 +143,7 @@
     </div>
 
     <div class="preview-container">
-        <!-- Canvas matches template aspect ratio -->
+        <!-- Canvas dimensions matching template aspect ratio -->
         <canvas id="canvas" width="1224" height="1550"></canvas>
     </div>
 
@@ -156,30 +153,28 @@
         let bgImage = new Image();
         let studentImage = null;
 
-        // Position coordinates based on image alignment
+        // Coordinates matched to your template image
         const POS = {
-            // Top area (To the left of the round stamp)
-            inst: { x: 500, y: 280, maxWidth: 450 },
+            // Top Left area next to the round stamp
+            inst: { x: 520, y: 310, maxWidth: 420 },
             
-            // Middle Circular Frame
-            photo: { x: 620, y: 785, radius: 185 },
+            // Central Circular Frame
+            photo: { x: 618, y: 785, radius: 180 },
             
-            // Brown Bar Area (Right of photo)
-            nameFirst: { x: 150, y: 720, maxWidth: 350 },
-            nameFull: { x: 150, y: 790, maxWidth: 350 },
-            age: { x: 150, y: 850 },
+            // Brown Bar Area (Text aligns from the right side inside bar)
+            nameFirst: { x: 140, y: 710, maxWidth: 330 },
+            nameFull: { x: 140, y: 780, maxWidth: 330 },
+            age: { x: 140, y: 845 },
             
-            // Bottom Area (Left of "تاريخ الاختبار:")
+            // Bottom Area (Positioned next to "تاريخ الاختبار:")
             dateX: 680,
             dateH_Y: 1285,
             dateG_Y: 1335
         };
 
-        // Custom fonts
         const instFont = "Amiri";
-        const studentFont = "Amiri";
 
-        const controls = ['instName', 'stdFirstName', 'nameColor', 'stdFatherName', 'stdSurname', 'stdAge', 'dateHijri', 'dateGreg', 'photoZoom', 'photoYOffset', 'dayArabic'];
+        const controls = ['instName', 'fontSelect', 'stdFirstName', 'nameColor', 'stdFatherName', 'stdSurname', 'stdAge', 'dateHijri', 'dateGreg', 'photoZoom', 'photoYOffset', 'dayArabic'];
         controls.forEach(id => document.getElementById(id).addEventListener('input', draw));
 
         function drawText(text, x, y, maxWidth, baseSize, font, isBold, color, align='right') {
@@ -196,16 +191,17 @@
         }
 
         function draw() {
+            const studentFont = document.getElementById('fontSelect').value;
             const chosenColor = document.getElementById('nameColor').value;
             
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Draw Background Template
+            // 1. Draw Template Background
             if (bgImage.complete && bgImage.src) {
                 ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
             }
 
-            // 1. Photo (Inside Circle)
+            // 2. Student Photo (Inside Circular Mask)
             if (studentImage) {
                 ctx.save();
                 ctx.beginPath(); 
@@ -226,38 +222,38 @@
                 ctx.restore();
             }
 
-            // 2. Institute Name (Top Area)
+            // 3. Institute / Mohallah Name
             ctx.save();
             ctx.direction = 'rtl';
-            drawText(document.getElementById('instName').value, POS.inst.x, POS.inst.y, POS.inst.maxWidth, 42, instFont, true, '#1a5276', 'center');
+            drawText(document.getElementById('instName').value, POS.inst.x, POS.inst.y, POS.inst.maxWidth, 40, instFont, true, '#1a5276', 'center');
             ctx.restore();
 
-            // 3. Student Names & Age (Inside Brown Bar)
+            // 4. Student Names & Age (Inside Brown Bar)
             ctx.save();
             ctx.direction = 'rtl';
             
             // First Name
-            drawText(document.getElementById('stdFirstName').value, POS.nameFirst.x, POS.nameFirst.y, POS.nameFirst.maxWidth, 55, studentFont, true, chosenColor, 'right');
+            drawText(document.getElementById('stdFirstName').value, POS.nameFirst.x, POS.nameFirst.y, POS.nameFirst.maxWidth, 50, studentFont, true, chosenColor, 'right');
             
             // Full Name (Father + Surname)
-            const fullNameLine = document.getElementById('stdFatherName').value + " " + document.getElementById('stdSurname').value;
-            drawText(fullNameLine, POS.nameFull.x, POS.nameFull.y, POS.nameFull.maxWidth, 40, studentFont, false, chosenColor, 'right');
+            const fullNameLine = (document.getElementById('stdFatherName').value + " " + document.getElementById('stdSurname').value).trim();
+            drawText(fullNameLine, POS.nameFull.x, POS.nameFull.y, POS.nameFull.maxWidth, 38, studentFont, false, chosenColor, 'right');
 
             // Age
             const ageText = document.getElementById('stdAge').value;
             if (ageText) {
-                drawText(ageText + " ورس", POS.age.x, POS.age.y, 300, 36, studentFont, false, chosenColor, 'right');
+                drawText(ageText + " ورس", POS.age.x, POS.age.y, 300, 34, studentFont, false, chosenColor, 'right');
             }
             ctx.restore();
 
-            // 4. Test Date (Bottom beside "تاريخ الاختبار:")
+            // 5. Test Date (Bottom Area beside "تاريخ الاختبار:")
             ctx.save();
             ctx.direction = 'rtl';
             const hijriLine = document.getElementById('dateHijri').value + (document.getElementById('dayArabic').value ? "، " + document.getElementById('dayArabic').value : "");
-            drawText(hijriLine, POS.dateX, POS.dateH_Y, 400, 38, studentFont, true, '#1b5e20', 'left');
+            drawText(hijriLine, POS.dateX, POS.dateH_Y, 400, 36, "Amiri", true, '#1b5e20', 'left');
 
             ctx.direction = 'ltr';
-            drawText(document.getElementById('dateGreg').value, POS.dateX, POS.dateG_Y, 400, 30, studentFont, false, '#1b5e20', 'left');
+            drawText(document.getElementById('dateGreg').value, POS.dateX, POS.dateG_Y, 400, 28, "Amiri", false, '#1b5e20', 'left');
             ctx.restore();
         }
 
@@ -272,7 +268,7 @@
 
         // Initialize default background image on load
         window.onload = () => {
-            bgImage.src = "Ikhtbr POst.jpg";
+            bgImage.src = document.getElementById('templateSelect').value || "M1.jpg";
             bgImage.onload = draw;
         };
 
