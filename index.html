@@ -94,7 +94,7 @@
             </select>
 
             <label style="font-size:0.75em; margin-top:8px;">حجم خط المركز (Institute Font Size):</label>
-            <input type="range" id="instFontSize" min="20" max="80" value="42" step="1">
+            <input type="range" id="instFontSize" min="10" max="100" value="42" step="1">
         </div>
 
         <div class="field">
@@ -160,7 +160,7 @@
         // Coordinates matched to your template image
         const POS = {
             // Top Left area next to the round stamp
-            inst: { x: 600, y: 500, maxWidth: 700 },
+            inst: { x: 550, y: 400, maxWidth: 700 },
             
             // Central Circular Frame
             photo: { x: 618, y: 785, radius: 180 },
@@ -176,7 +176,7 @@
             dateG_Y: 1335
         };
 
-        const instFont = "Amiri";
+        const staticFont = "Kanz-al-Marjaan";
 
         const controls = ['instName', 'instFontSize', 'fontSelect', 'stdFirstName', 'nameColor', 'stdFatherName', 'stdSurname', 'stdAge', 'dateHijri', 'dateGreg', 'photoZoom', 'photoYOffset', 'dayArabic'];
         controls.forEach(id => document.getElementById(id).addEventListener('input', draw));
@@ -236,9 +236,9 @@
         POS.inst.y, 
         POS.inst.maxWidth, 
         currentInstFontSize, /* Uses value from the slider! */
-        instFont, 
+        staticFont, 
         true, 
-        '#1a5276', 
+        '#770000', 
         'center'
     );
     ctx.restore();
@@ -283,7 +283,7 @@
 
         // Initialize default background image on load
         window.onload = () => {
-            bgImage.src = document.getElementById('templateSelect').value || "M1.jpg";
+            bgImage.src = document.getElementById('templateSelect').value || ;
             bgImage.onload = draw;
         };
 
