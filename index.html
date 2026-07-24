@@ -10,12 +10,12 @@
     <style>
         /* Define your uploaded custom font files here if needed */
         @font-face {
-            font-family: 'MyInstituteFont';
-            src: url('institute-font.ttf') format('truetype');
+            font-family: 'Kanz al Marjaan';
+            src: url('Kanz-al-Marjaan.ttf') format('truetype');
         }
         @font-face {
-            font-family: 'MyStudentFont';
-            src: url('student-font.ttf') format('truetype');
+            font-family: 'Al-Kanz';
+            src: url('Al-Kanz for Windows.ttf') format('truetype');
         }
 
         :root { --primary: #1a5276; --gold: #d4af37; --bg: #1a1a2e; }
@@ -39,7 +39,7 @@
         <h2>Ikhtebaar Appreciation Post</h2>
         
         <<div class="field">
-            <label>1. Select Marhala</label>
+            <label>Select Marhala</label>
             <select id="templateSelect" onchange="updateBackground()">
                 <option value="">-- Select Marhalah --</option>
                 <option value="M1.jpg">Marhala 1</option>
@@ -55,9 +55,9 @@
         </div>
 
         <div class="field">
-            <label>2. المركز / المحلة (أعلى اليسار بجانب الشعار)</label>
+            <label>Mohallah Institue/Imani Darsgah</label>
             <select id="instName">
-                <option value="">-- اختر الموقع --</option>
+                <option value="">--Select--</option>
                 <option value="قسم التحفيظ - جمالي محلة">جمالي محلة</option>
                 <option value="قسم التحفيظ - المحلة البرهانية">المحلة البرهانية</option>
                 <option value="قسم التحفيظ - برهاني باغ محلة">برهاني باغ محلة</option>
@@ -94,20 +94,34 @@
             </select>
         </div>
 
-        <div class="field">
-            <label>3. بيانات الطالب (داخل الشريط البني)</label>
-            <input type="text" id="stdFirstName" placeholder="الاسم الأول">
-            <input type="text" id="stdFatherName" placeholder="اسم الأب">
-            <input type="text" id="stdSurname" placeholder="الكنية">
-            <input type="text" id="stdAge" placeholder="العمر (مثال: ١٥)">
-            <label style="font-size:0.75em; margin-top:8px;">لون نص الأسماء:</label>
-            <input type="color" id="nameColor" value="#ffffff">
+             </select>
         </div>
 
         <div class="field">
-            <label>4. تاريخ الاختبار (أسفل المنشور)</label>
+            <label>3. Typography (Names Only)</label>
+            <select id="fontSelect">
+                <option value="Amiri">Amiri (Default)</option>
+                <option value="Aref Ruqaa">Aref Ruqaa</option>
+                <option value="Scheherazade New">Scheherazade New</option>
+                <option value="Al-Kanz for Windows">Al-Kanz</option>
+                <option value="Kanz-al-Marjaan">Kanz al Marjaan</option>
+            </select>
+            <label style="font-size: 0.7em; margin-top:5px;">Color for Student Names</label>
+            <input type="color" id="nameColor" value="#1a5276">
+        </div>
+
+        <div class="field">
+            <label>Student Details</label>
+            <input type="text" id="stdFirstName" placeholder="الاسم ">
+            <input type="text" id="stdFatherName" placeholder="اسم الوالد / زوج">
+            <input type="text" id="stdSurname" placeholder="اللقب (Surname)">
+            <input type="text" id="stdAge" placeholder="اAge">
+        </div>
+
+        <div class="field">
+            <label>5. Day & Dates</label>
             <select id="dayArabic">
-                <option value="">-- اليوم --</option>
+                <option value="">-- Day --</option>
                 <option value="يوم السبت">يوم السبت</option>
                 <option value="يوم الأحد">يوم الأحد</option>
                 <option value="يوم الإثنين">يوم الإثنين</option>
@@ -116,20 +130,19 @@
                 <option value="يوم الخميس">يوم الخميس</option>
                 <option value="يوم الجمعة">يوم الجمعة</option>
             </select>
-            <input type="text" id="dateHijri" placeholder="التاريخ الهجري">
-            <input type="text" id="dateGreg" placeholder="التاريخ الميلادي">
+            <input type="text" id="dateHijri" placeholder="التاريخ">
+            <input type="text" id="dateGreg" placeholder="Gregorian Date">
         </div>
 
+
         <div class="field">
-            <label>5. صورة الطالب (في الإطار الدائري)</label>
+            <label>6. Photo Controls</label>
             <input type="file" id="studentUpload" accept="image/*">
-            <label style="font-size:0.7em;">تكبير/تصغير</label>
             <input type="range" id="photoZoom" min="0.5" max="3.0" step="0.1" value="1">
-            <label style="font-size:0.7em;">تحريك رأسي</label>
             <input type="range" id="photoYOffset" min="-500" max="500" value="0">
         </div>
 
-        <button onclick="download()">تحميل الصورة PNG</button>
+        <button onclick="download()">Download PNG</button>
     </div>
 
     <div class="preview-container">
