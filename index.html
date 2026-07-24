@@ -157,7 +157,7 @@
         // Coordinates matched to your template image
         const POS = {
             // Top Left area next to the round stamp
-            inst: { x: 700, y: 500, maxWidth: 700 },
+            inst: { x: 600, y: 500, maxWidth: 700 },
             
             // Central Circular Frame
             photo: { x: 618, y: 785, radius: 180 },
@@ -226,7 +226,7 @@
             // 3. Institute / Mohallah Name
             ctx.save();
             ctx.direction = 'rtl';
-            drawText(document.getElementById('instName').value, POS.inst.x, POS.inst.y, POS.inst.maxWidth, 40, instFont, true, '#1a5276', 'center');
+            drawText(document.getElementById('instName').value, POS.inst.x, POS.inst.y, POS.inst.maxWidth, 60, instFont, true, '#1a5276', 'center');
             ctx.restore();
 
             // 4. Student Names & Age (Inside Brown Bar)
