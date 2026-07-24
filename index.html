@@ -178,7 +178,7 @@
 
         const instFont = "Amiri";
 
-        const controls = ['instName', 'fontSelect', 'stdFirstName', 'nameColor', 'stdFatherName', 'stdSurname', 'stdAge', 'dateHijri', 'dateGreg', 'photoZoom', 'photoYOffset', 'dayArabic'];
+        const controls = ['instName', 'instFontSize', 'fontSelect', 'stdFirstName', 'nameColor', 'stdFatherName', 'stdSurname', 'stdAge', 'dateHijri', 'dateGreg', 'photoZoom', 'photoYOffset', 'dayArabic'];
         controls.forEach(id => document.getElementById(id).addEventListener('input', draw));
 
         function drawText(text, x, y, maxWidth, baseSize, font, isBold, color, align='right') {
@@ -197,7 +197,8 @@
         function draw() {
             const studentFont = document.getElementById('fontSelect').value;
             const chosenColor = document.getElementById('nameColor').value;
-            
+
+            const currentInstFontSize = parseInt(document.getElementById('instFontSize').value);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             // 1. Draw Template Background
@@ -228,9 +229,19 @@
 
             // 3. Institute / Mohallah Name
             ctx.save();
-            ctx.direction = 'rtl';
-            drawText(document.getElementById('instName').value, POS.inst.x, POS.inst.y, POS.inst.maxWidth, 60, instFont, true, '#1a5276', 'center');
-            ctx.restore();
+    ctx.direction = 'rtl';
+    drawText(
+        document.getElementById('instName').value, 
+        POS.inst.x, 
+        POS.inst.y, 
+        POS.inst.maxWidth, 
+        currentInstFontSize, /* Uses value from the slider! */
+        instFont, 
+        true, 
+        '#1a5276', 
+        'center'
+    );
+    ctx.restore();
 
             // 4. Student Names & Age (Inside Brown Bar)
             ctx.save();
